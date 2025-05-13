@@ -31,44 +31,52 @@ const cart = [];
 // Add products to cart
 
 function addProductToCart(productId) {
-  let product = products.find(product => product.productId === productId);
-  
+  let product = products.find(function(product) {
+    return product.productId === productId;
+  });
+
   if (!product) return;
   product.quantity += 1;
-  
+
   if (!cart.includes(product)) {
-     cart.push(product);
+    cart.push(product);
   }
 }
 
 // Increase quantity of products already in the cart
 
 function increaseQuantity(productId) {
-  const product = products.find((product) => product.productId === productId);
-  
+  const product = products.find(function(product) {
+    return product.productId === productId;
+  });
+
   if (!product) return;
-   ++product.quantity;
+  ++product.quantity;
 }
 
 // Decrease quantity of products in the cart
 // If quantity is 0, remove the product from the cart
 
 function decreaseQuantity(productId) {
-  const product = products.find((product) => product.productId === productId);
-  
+  const product = products.find(function(product) {
+    return product.productId === productId;
+  });
+
   if (!product) return;
   --product.quantity;
-  
+
   if (product.quantity === 0) {
-  removeProductFromCart(productId);
+    removeProductFromCart(productId);
   }
 }
 
 // Remove the product from the cart regardless of quantity
 
 function removeProductFromCart(productId) {
-  const cartSlot = cart.findIndex(product => product.productId === productId);
-  
+  const cartSlot = cart.findIndex(function(product) {
+    return product.productId === productId;
+  });
+
   if (cartSlot !== -1) {
     cart[cartSlot].quantity = 0;
     cart.splice(cartSlot, 1);
