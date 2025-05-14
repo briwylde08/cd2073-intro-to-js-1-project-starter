@@ -94,19 +94,30 @@ function cartTotal() {
   return totalPrice;
 }
 
-//Process payment and return remaining balance
-
-function pay(amount) {
-  const total = cartTotal();
-  const remainingBalance = amount - total;
-  return remainingBalance;
-}
-
 //Empty the cart
 
 function emptyCart() {
-  cart.length = 0;
-  totalPaid = 0;
+  cart.forEach(function(product) {
+    product.quantity = 0;
+  });
+  cart.splice(0, cart.length);
+}
+
+//Process payment and return remaining balance
+
+let totalPaid = 0;
+
+function pay(amount) {
+  totalPaid += amount;
+  const total = cartTotal();
+  const remainingBalance = totalPaid - total;
+
+  if (remainingBalance >= 0) {
+    totalPaid = 0;  
+    emptyCart(); 
+  }
+
+  return remainingBalance;
 }
 
 /* The following is for running unit tests. 
