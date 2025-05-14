@@ -97,9 +97,6 @@ function cartTotal() {
 //Empty the cart
 
 function emptyCart() {
-  cart.forEach(function(product) {
-    product.quantity = 0;
-  });
   cart.splice(0, cart.length);
 }
 
